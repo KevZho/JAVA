@@ -1,0 +1,38 @@
+# Program ucitava cijeli broj te ispisuje sljedecih x brojeva
+#
+			load r0, @msg1		; ucitaj poruku za trazenje broja
+			load r1, @msg2		; ucitaj poruku o pogresci
+			load r2, @msg3		; ucitaj poruku koja ispisuje Sljedecih
+			load r3, @msg4		; ucitaj poruku koja ispisuje brojeva je
+			load r4, @koliko	; ucitaj koliko iducih brojeva se ispisuje 
+			load r6, @nula		; ucitaj u r7 nulu
+			load r7, @msg5		; ucitaj znak za novi red
+#
+@petlja:	echo r0				; ispisi poruku o unosu broja
+			iinput 0			; ucitaj integer na lokaciju 0
+			jumpIfTrue @ucitano	; ako je gotovo idi na ucitano
+			echo r1				; ispisi da je greska
+			jump @petlja		; ponovno ucitaj
+#
+@ucitano:	load r5, 0			; ucitaj u r5 lokaciju 0
+			echo r2				; ispisi msg3
+			echo r4				; koliko iducih se ispisuje
+			echo r3				; ispisi msg4
+#
+@ispis:		increment r5		; povecaj r5;
+			decrement r4		; smanji broj preostalih za 1
+			echo r5				; ispisi trenutni r5;
+			echo r7				; idi u novi red;
+			testEquals r4, r6	; provjeri da li smo dosli do kraja
+			jumpIfTrue @kraj	; ako je nula onda je kraj
+			jump @ispis			; inace ponovi postupak
+#
+@kraj:		halt				; zaustavi rad procesora 
+#
+@msg1:		DEFSTR "Unesite početni broj: "
+@msg2:		DEFSTR "Unos nije moguće protumaciti kao cijeli broj.\n"
+@msg3:		DEFSTR "Sljedećih "
+@msg4:		DEFSTR " brojeva je:\n"
+@msg5: 		DEFSTR "\n"
+@koliko:		DEFINT 5
+@nula:		DEFINT 0
