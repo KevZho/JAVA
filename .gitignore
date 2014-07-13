@@ -1,5 +1,6 @@
 */bin/*
 */build/*
+*/dist/
 
 local.properties
 */.settings/
@@ -20,6 +21,8 @@ local.properties
 
 # PDT-specific
 */.buildpath
+
+*/dist/
 
 # sbteclipse plugin 
 */.target
